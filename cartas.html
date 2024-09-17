@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="style.css">
+    <script src="truco.js"></script>
+    <title>cartas</title>
+</head>
+
+<body>
+    <main>
+        <div class="navbar">
+            <div class="info">
+                Cartas Restantes:
+                <span id="remaining" class="info">0</span>
+            </div>
+            <div class="info">
+                Deck ID:
+                <span class="info" id="deck_id">_</span>
+            </div>
+        </div>
+        <div class="canvas">
+            <figure class="cartas" id="carta1">
+
+            </figure>
+            <figure class="cartas" id="carta2">
+
+            </figure>
+            <figure class="cartas" id="carta3">
+
+            </figure>
+        </div>
+        <div class="butoes">
+            <button class="butao">Buscar cartas</button>
+            <button class="butao" onClick="olharCartas()">Olhar cartas</button>
+            <button class="butao" onClick="reembaralhar()">Reembaralhar</button>
+
+        </div>
+    </main>
+</body>
+
+</html>

@@ -1,0 +1,48 @@
+body {
+    display: block;
+    background-color: green;
+    height: 100vh;
+    margin: 0;
+}
+
+main {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    justify-content: space-evenly;
+    height: inherit;
+}
+
+.canvas {
+    display: flex;
+    justify-content: center;
+    background-color: blue;
+    width: 100%;
+}
+
+.cartas {
+    width: 226px;
+    height: 314px;
+    background-color: yellow;
+    display: inline-block;
+    margin: auto;
+    border-radius: 8px;
+}
+
+.butoes {
+    display: flex;
+    justify-content: center;
+    background-color: red;
+}
+
+.butao {
+    margin: 0 12px;
+    font-size: 24px;
+    padding: 8px;
+    border-radius: 10px;
+}
+
+.navbar {
+    background-color: red;
+    font-size: 24px;
+}
