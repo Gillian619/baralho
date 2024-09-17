@@ -8,7 +8,11 @@ function olharCartas() {
             for (let i = 0; i < 3; i++) {
                 const id = `carta${i + 1}`;
                 const card = document.getElementById(id);
-                const img = document.createElement('img')
+                let img = card.querySelector('img')
+                //const img = document.createElement('img')
+                if (img == null) {
+                    img = document.createElement('img');
+                }
                 img.setAttribute('src', cards[i].image);
                 card.append(img);
             }
