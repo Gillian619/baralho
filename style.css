@@ -1,6 +1,6 @@
 body {
     display: block;
-    background-color: green;
+    background-color: rgb(6, 104, 6);
     height: 100vh;
     margin: 0;
 }
@@ -16,14 +16,13 @@ main {
 .canvas {
     display: flex;
     justify-content: center;
-    background-color: blue;
     width: 100%;
 }
 
 .cartas {
     width: 226px;
     height: 314px;
-    background-color: yellow;
+    background-color: rgb(3, 139, 25);
     display: inline-block;
     margin: auto;
     border-radius: 8px;
@@ -32,7 +31,7 @@ main {
 .butoes {
     display: flex;
     justify-content: center;
-    background-color: red;
+    background-color: rgba(22, 175, 137, 0.493);
 }
 
 .butao {
@@ -43,6 +42,6 @@ main {
 }
 
 .navbar {
-    background-color: red;
+    background-color: rgba(22, 175, 137, 0.493);
     font-size: 24px;
 }

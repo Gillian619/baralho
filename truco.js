@@ -72,7 +72,6 @@ function Deck(deckId) {  //função construtora
     }
 
     const atualizarInfo = (jsonData) => {
-        console.log(jsonData)
         if (!jsonData.success)
             throw new Error("Erro ao acessar dados da api");
         // const deck_id = jsonData.deck_id;
@@ -83,7 +82,6 @@ function Deck(deckId) {  //função construtora
         info1.innerText = this.deckId;
         info2.innerText = remaining;
         // console.log(info2)
-        console.log(jsonData.deckId)
         return jsonData;
     }
 }
