@@ -1,46 +1,124 @@
-function olharCartas() {
-    fetch('https://deckofcardsapi.com/api/deck/5yymdmpms2fr/draw/?count=3')
-        .then(data => {
-            const obj = data.json();
-            return obj
-        }).then(json => {
-            const cards = json.cards;
-            for (let i = 0; i < 3; i++) {
-                const id = `carta${i + 1}`;
-                const card = document.getElementById(id);
-                let img = card.querySelector('img')
-                //const img = document.createElement('img')
-                if (img == null) {
-                    img = document.createElement('img');
-                }
-                img.setAttribute('src', cards[i].image);
-                card.append(img);
-            }
-            /*const card1 = document.getElementById("carta1");
-            const card2 = document.getElementById("carta2");
-            const card3 = document.getElementById("carta3");
-            const img1 = document.createElement('img')
-            const img2 = document.createElement('img')
-            const img3 = document.createElement('img')
-            img1.setAttribute('src', cards[0].image);
-            img2.setAttribute('src', cards[1].image);
-            img3.setAttribute('src', cards[2].image);
-            card1.append(img1);
-            card2.append(img2);
-            card3.append(img3);
+let deckId = "3qetepz1hdag";
+const deck = new Deck(deckId);
 
-            return cards
-        */})
+function Deck(deckId) {  //função construtora
+    this.deckId = deckId;
+    this.listOfCards = "4C,7H,AS,7D,3C,3H,3S,3D,2C,2H,2S,2D,AC,AH,AD,KC,KH,KS,KD,JC,JH,JS,JD,QC,QH,QS,QD"
+
+    this.gerarBaralho = function () {
+
+        fetch(`https://deckofcardsapi.com/api/deck/new/shuffle/?cards=${this.listOfCards}`)
+            .then(converterParaJson)
+            .then(atualizarInfo)
+            .catch(erro => alert(erro));
+    }
+
+
+
+    this.olharcartas = function () {
+
+        fetch(`https://deckofcardsapi.com/api/deck/${this.deckId}/draw/?count=3`)
+
+
+            .then(converterParaJson)
+            .then(atualizarInfo)
+            .then(imprimeTabela)
+            .then(mostrarCartas)
+            .catch(erro => alert(erro));
+    }
+
+    this.Reembaralhar = function () {
+        fetch(`https://deckofcardsapi.com/api/deck/${this.deckId}/shuffle/`)
+            .then(converterParaJson)
+            .then(atualizarInfo)
+            .catch(erro => alert(erro));
+
+        // console.log(jsonData);
+        // if (jsonData.success) {
+        alert("Reembaralhado com sucesso!");
+        // }
+        // })
+    }
 }
-function reembaralhar() {
-    fetch('https://deckofcardsapi.com/api/deck/5yymdmpms2fr/shuffle/')
-        .then(data => {
-            const obj = data.json();
-            return obj
-        })
-        .then(json => {
-            if (json.success) {
-                alert("Embaralhado com sucesso")
-            } else { alert("ocorreu um erro") }
-        })
+
+// const deck1 = new Deck("id1");
+// const deck2 = Deck("id2");
+// console.log(deck1);
+// console.log(deck2);
+// console.log(Deck);
+// console.log(Deck.deckId);
+
+function converterParaJson(data) {
+    const obj = data.json();
+    return obj;
 }
+function gerarBaralho() {
+    fetch("https://deckofcardsapi.com/api/deck/new/shuffle/?cards=4C,7H,AS,7D,3C,3H,3S,3D,2C,2H,2S,2D,AC,AH,AD,KC,KH,KS,KD,JC,JH,JS,JD,QC,QH,QS,QD")
+        .then(converterParaJson)
+        .then(atualizarInfo)
+        .catch(erro => alert(erro));
+
+}
+
+function imprimeTabela(json) {
+    console.table(json.cards, ["code", "image", "value", "sult"]);
+    console.log('restam', json.remaining, 'cartas')
+
+    return json;
+
+}
+
+function mostrarCartas(jsonData) {
+    const cards = jsonData.cards;
+    console.log(jsonData)
+
+    for (let i = 0; i < 3; i++) {
+        const id = `carta${i + 1}`;
+
+        const card = document.getElementById(id);
+        let img = card.querySelector('img');
+
+        if (img == null) {
+            img = document.createElement('img');
+        }
+
+        img.setAttribute('src', cards[i].image);
+        card.append(img);
+    }
+
+
+
+    return jsonData;
+
+}
+
+function Reembaralhar() {
+    fetch(`https://deckofcardsapi.com/api/deck/${deckId}/shuffle/`)
+        .then(converterParaJson)
+        .then(atualizarInfo)
+        .catch(erro => alert(erro));
+
+    // console.log(jsonData);
+    // if (jsonData.success) {
+    alert("Reembaralhado com sucesso!");
+    // }
+    // })
+}
+
+function atualizarInfo(jsonData) {
+    if (!jsonData.success)
+        throw new Error("Erro ao acessar dados da api");
+    // const deck_id = jsonData.deck_id;
+    deckId = jsonData.deck_id;
+    const remaining = jsonData.remaining;
+    const info1 = document.getElementById("deck_id");
+    const info2 = document.getElementById("remaining");
+    info1.innerText = deckId;
+    info2.innerText = remaining;
+    // console.log(info2)
+
+    return jsonData;
+
+}
+
+
